@@ -45,7 +45,7 @@ export default function App() {
 
     const message = `Hi Ruches, I accessed your ACY Partner Knowledge Hub.%0A%0AName: ${name}%0AEmail: ${email}%0AWhatsApp: ${phone}%0AInterest: ${interest}%0ARequested Document: ${selectedDoc}%0A%0AI would like to learn more.`;
 
-    window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`, "_blank");
+    window.open(`https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`, "_blank");
     setShowForm(false);
   }
 
