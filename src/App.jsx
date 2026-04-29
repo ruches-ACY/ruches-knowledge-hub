@@ -5,7 +5,7 @@ export default function App() {
   const [selectedDoc, setSelectedDoc] = useState("");
   const [activeTab, setActiveTab] = useState("Introducing Broker");
 
-  const whatsappNumber = "639000000000"; // CHANGE THIS to your real WhatsApp number
+  const whatsappNumber = "639627969908"; // CHANGE THIS to your real WhatsApp number
 
   const documents = {
     "Introducing Broker": [
@@ -180,16 +180,7 @@ body {
     radial-gradient(circle at top right, rgba(245, 208, 111, 0.25), transparent 30%),
     #061a3d;
   color: white;
-  font-family: 'Montserrat', Arial, sans-serif;
-}
-
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px 7%;
-  border-bottom: 1px solid rgba(245, 208, 111, 0.25);
-  backdrop-filter: blur(10px);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .brand {
@@ -239,22 +230,25 @@ body {
 }
 
 .hero h1 {
-  font-size: clamp(42px, 7vw, 78px);
+  font-size: clamp(44px, 7vw, 82px);
   line-height: 0.95;
   margin: 0 0 24px;
-  letter-spacing: -2px;
+  letter-spacing: -1.8px;
+  font-weight: 800;
 }
 
 .hero h1 span {
   color: #f5d06f;
+  letter-spacing: -1px;
 }
 
 .hero p {
-  font-family: 'Montserrat', Arial, sans-serif;
   font-size: 20px;
-  line-height: 1.7;
+  line-height: 1.75;
   max-width: 760px;
   color: #dbeafe;
+  font-weight: 400;
+  letter-spacing: 0.2px;
 }
 
 .heroBtns {
@@ -310,8 +304,10 @@ body {
 }
 
 .section h2, .journey h2 {
-  font-size: 42px;
+  font-size: 40px;
   margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
 }
 
 .sectionText {
@@ -376,9 +372,9 @@ body {
 }
 
 .card h3 {
-  position: relative;
-  font-size: 24px;
-  margin-top: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
 }
 
 .card p {
@@ -489,5 +485,34 @@ body {
   .hero {
     padding-top: 60px;
   }
+}
+/* === LUXURY TYPOGRAPHY POLISH === */
+h1, h2, h3 {
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.5px;
+}
+
+/* Improve ALL paragraph readability */
+p {
+  line-height: 1.75;
+  letter-spacing: 0.2px;
+}
+
+/* Make buttons feel premium */
+.goldBtn, .navBtn {
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Subtle text polish */
+.subbrand {
+  letter-spacing: 0.4px;
+}
+.hero h1 {
+  letter-spacing: -2px;
+}
+
+button {
+  transition: all 0.25s ease;
 }
 `;
