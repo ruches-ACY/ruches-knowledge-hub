@@ -4,14 +4,14 @@ export default function App() {
   const [showForm, setShowForm] = useState(false);
   const [selectedDoc, setSelectedDoc] = useState("");
 
-  const whatsappNumber = "639000000000"; // CHANGE THIS to your real WhatsApp number
+  const whatsappNumber = "639000000000"; // CHANGE THIS
 
   const documents = [
     "IB Partner Starter Guide",
     "Fund Manager Roadmap",
     "Risk Management Framework",
     "Copy Trading Explained",
-    "Account Opening & Funding Guide"
+    "Account Opening Guide"
   ];
 
   function openForm(doc) {
@@ -27,7 +27,7 @@ export default function App() {
     const phone = e.target.phone.value;
     const interest = e.target.interest.value;
 
-    const message = `Hi Ruches, I accessed your Knowledge Hub.%0A%0AName: ${name}%0AEmail: ${email}%0AWhatsApp: ${phone}%0AInterest: ${interest}%0ARequested Document: ${selectedDoc}%0A%0AI would like to learn more.`;
+    const message = `Hi Ruches, I accessed your Knowledge Hub.%0A%0AName: ${name}%0AEmail: ${email}%0AWhatsApp: ${phone}%0AInterest: ${interest}%0ARequested Document: ${selectedDoc}`;
 
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
     setShowForm(false);
@@ -36,23 +36,27 @@ export default function App() {
   return (
     <div style={styles.page}>
       <section style={styles.hero}>
-        <h1 style={styles.title}>Ruches Partner Knowledge Hub</h1>
+        <h1 style={styles.title}>ACY Partner Knowledge Hub</h1>
         <p style={styles.subtitle}>
-          A premium blue-and-gold resource center for Introducing Brokers, Fund Managers, Copy Trading clients, and serious traders.
+          A premium resource center for Introducing Brokers, Fund Managers, and serious traders looking to scale their trading business.
         </p>
-        <button style={styles.goldButton} onClick={() => openForm("Partner Knowledge Hub Access")}>
+
+        <button style={styles.goldButton} onClick={() => openForm("Full Access")}>
           Get Access to Partner System
         </button>
       </section>
 
       <section style={styles.section}>
-        <h2>Choose Your Resource</h2>
+        <h2 style={styles.sectionTitle}>Choose Your Resource</h2>
 
         <div style={styles.grid}>
           {documents.map((doc) => (
             <div style={styles.card} key={doc}>
-              <h3>{doc}</h3>
-              <p>Access this guide and receive direct next-step support from Ruches.</p>
+              <h3 style={{ marginBottom: 10 }}>{doc}</h3>
+              <p style={{ opacity: 0.8 }}>
+                Access this guide and receive direct guidance tailored to your next step.
+              </p>
+
               <button style={styles.goldButtonSmall} onClick={() => openForm(doc)}>
                 Get Access
               </button>
@@ -64,12 +68,12 @@ export default function App() {
       {showForm && (
         <div style={styles.overlay}>
           <form style={styles.form} onSubmit={submitLead}>
-            <h2>Get Access</h2>
-            <p>You requested: <strong>{selectedDoc}</strong></p>
+            <h2>Secure Your Access</h2>
+            <p>You selected: <b>{selectedDoc}</b></p>
 
-            <input name="name" required placeholder="Full name" style={styles.input} />
-            <input name="email" type="email" required placeholder="Email address" style={styles.input} />
-            <input name="phone" required placeholder="WhatsApp number" style={styles.input} />
+            <input name="name" required placeholder="Full Name" style={styles.input} />
+            <input name="email" required placeholder="Email" style={styles.input} />
+            <input name="phone" required placeholder="WhatsApp Number" style={styles.input} />
 
             <select name="interest" style={styles.input}>
               <option>Introducing Broker</option>
@@ -82,7 +86,11 @@ export default function App() {
               Continue to WhatsApp
             </button>
 
-            <button type="button" style={styles.cancelButton} onClick={() => setShowForm(false)}>
+            <button
+              type="button"
+              onClick={() => setShowForm(false)}
+              style={styles.cancel}
+            >
               Cancel
             </button>
           </form>
@@ -95,91 +103,107 @@ export default function App() {
 const styles = {
   page: {
     minHeight: "100vh",
-    background: "#061a4d",
+    background: "#071a3a", // deep navy
     color: "white",
-    fontFamily: "Arial, sans-serif"
+    fontFamily: "Arial"
   },
+
   hero: {
-    padding: "70px 30px",
-    background: "linear-gradient(135deg, #061a4d, #0b3fa5, #d4af37)"
+    padding: "80px 30px",
+    background: "linear-gradient(135deg, #071a3a, #0d2c73, #cfa73c)", // ACY feel
   },
+
   title: {
-    fontSize: "48px",
-    marginBottom: "20px"
+    fontSize: "50px",
+    marginBottom: 20,
+    fontWeight: "bold"
   },
+
   subtitle: {
     fontSize: "20px",
     maxWidth: "750px",
-    lineHeight: "1.6"
+    lineHeight: 1.6,
+    opacity: 0.9
   },
+
   section: {
-    padding: "50px 30px"
+    padding: "60px 30px"
   },
+
+  sectionTitle: {
+    fontSize: "32px",
+    marginBottom: 20
+  },
+
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-    gap: "20px",
-    marginTop: "30px"
+    gap: 20
   },
+
   card: {
-    background: "rgba(255,255,255,0.1)",
-    padding: "25px",
-    borderRadius: "20px",
-    border: "1px solid rgba(212,175,55,0.4)"
+    background: "rgba(255,255,255,0.05)",
+    padding: 25,
+    borderRadius: 18,
+    border: "1px solid rgba(207,167,60,0.4)"
   },
+
   goldButton: {
-    background: "#d4af37",
-    color: "#061a4d",
-    padding: "15px 24px",
+    background: "linear-gradient(90deg, #cfa73c, #f5d06f)", // vibrant gold
+    color: "#071a3a",
+    padding: "15px 25px",
     border: "none",
-    borderRadius: "14px",
+    borderRadius: 12,
     fontWeight: "bold",
     cursor: "pointer",
-    marginTop: "20px"
+    marginTop: 20
   },
+
   goldButtonSmall: {
-    background: "#d4af37",
-    color: "#061a4d",
-    padding: "12px 18px",
+    background: "linear-gradient(90deg, #cfa73c, #f5d06f)",
+    color: "#071a3a",
+    padding: "10px 16px",
     border: "none",
-    borderRadius: "12px",
+    borderRadius: 10,
     fontWeight: "bold",
     cursor: "pointer",
-    marginTop: "15px"
+    marginTop: 15
   },
+
   overlay: {
     position: "fixed",
     inset: 0,
     background: "rgba(0,0,0,0.75)",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    padding: "20px"
+    justifyContent: "center"
   },
+
   form: {
-    background: "#061a4d",
-    padding: "30px",
-    borderRadius: "24px",
+    background: "#071a3a",
+    padding: 30,
+    borderRadius: 20,
     width: "100%",
-    maxWidth: "480px",
-    border: "1px solid #d4af37"
+    maxWidth: 450,
+    border: "1px solid #cfa73c"
   },
+
   input: {
     width: "100%",
-    padding: "14px",
-    marginTop: "12px",
-    borderRadius: "12px",
-    border: "1px solid #d4af37",
-    boxSizing: "border-box"
+    padding: 14,
+    marginTop: 12,
+    borderRadius: 10,
+    border: "1px solid #cfa73c"
   },
-  cancelButton: {
+
+  cancel: {
+    marginTop: 12,
     width: "100%",
-    marginTop: "12px",
-    padding: "14px",
-    borderRadius: "12px",
+    padding: 12,
+    borderRadius: 10,
+    border: "1px solid white",
     background: "transparent",
     color: "white",
-    border: "1px solid white",
     cursor: "pointer"
   }
 };
