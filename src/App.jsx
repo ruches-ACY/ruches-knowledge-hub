@@ -956,4 +956,23 @@ select:focus {
   border-color: #f5d06f;
   box-shadow: 0 0 0 4px rgba(245, 208, 111, 0.16);
 }
+.page::before {
+  pointer-events: none;
+}
+
+.card::after,
+.ibBox::after,
+.authorityCard::after,
+.ctaBox::after {
+  pointer-events: none;
+}
+
+.goldBtn,
+.ghostBtn,
+.navBtn,
+button {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+}
 `;
