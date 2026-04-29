@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Users, Briefcase, TrendingUp, FileText, Download, Calendar, ShieldCheck, ArrowRight, Star, BookOpen, BarChart3, MessageCircle, Globe2, CheckCircle2, Crown, Sparkles, Target, WalletCards } from "lucide-react";
@@ -92,13 +93,13 @@ const hubs = [
 
 const categories = ["All", "Introducing Broker", "Fund Manager", "Trader Resources", "Copy Trading"];
 
-function Button({ children, className = "", href }) {
+function Button({ children, className = "", href, onClick, type = "button" }) {
   const base = "inline-flex items-center justify-center rounded-2xl px-6 py-4 text-sm font-bold transition shadow-lg";
   const classes = `${base} ${className}`;
   if (href) {
     return <a href={href} target="_blank" rel="noreferrer" className={classes}>{children}</a>;
   }
-  return <button className={classes}>{children}</button>;
+  return <button type={type} onClick={onClick} className={classes}>{children}</button>;
 }
 
 function Card({ children, className = "" }) {
@@ -108,12 +109,32 @@ function Card({ children, className = "" }) {
 export default function App() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
+  const [selectedDoc, setSelectedDoc] = useState(null);
+  const [lead, setLead] = useState({ name: "", email: "", whatsapp: "", interest: "Introducing Broker" });
+
+  const yourWhatsAppNumber = "639000000000"; // Replace with your real WhatsApp number, no + sign
 
   const filteredDocs = documents.filter((doc) => {
     const matchCategory = category === "All" || doc.category === category;
     const matchSearch = `${doc.title} ${doc.description} ${doc.category}`.toLowerCase().includes(query.toLowerCase());
     return matchCategory && matchSearch;
   });
+
+  const openLeadForm = (doc) => {
+    setSelectedDoc(doc);
+    setLead((prev) => ({ ...prev, interest: doc.category }));
+  };
+
+  const handleLeadSubmit = (e) => {
+    e.preventDefault();
+    if (!lead.name || !lead.email || !lead.whatsapp || !selectedDoc) return;
+
+    const message = `Hi Ruches, I just accessed your Partner Knowledge Hub.%0A%0AName: ${encodeURIComponent(lead.name)}%0AEmail: ${encodeURIComponent(lead.email)}%0AWhatsApp: ${encodeURIComponent(lead.whatsapp)}%0AInterest: ${encodeURIComponent(lead.interest)}%0ARequested document: ${encodeURIComponent(selectedDoc.title)}%0A%0AI would like to learn more about the next step.`;
+
+    window.open(selectedDoc.file, "_blank");
+    window.open(`https://wa.me/${yourWhatsAppNumber}?text=${message}`, "_blank");
+    setSelectedDoc(null);
+  };
 
   return (
     <main className="min-h-screen bg-[#03112f] text-white">
@@ -155,7 +176,7 @@ export default function App() {
                 <Button href="#documents" className="bg-gradient-to-r from-yellow-300 to-amber-500 text-blue-950 hover:scale-[1.02]">
                   Access Documents <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button href="https://wa.me/639000000000" className="border border-white/20 bg-white/10 text-white hover:bg-white/20">
+                <Button href="https://wa.me/639627969908" className="border border-white/20 bg-white/10 text-white hover:bg-white/20">
                   <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Ruches
                 </Button>
               </div>
@@ -252,8 +273,8 @@ export default function App() {
                   <p className="mt-3 min-h-24 text-sm leading-6 text-blue-100">{doc.description}</p>
                   <div className="mt-6 flex items-center justify-between">
                     <span className="text-sm text-blue-200">{doc.level}</span>
-                    <Button href={doc.file} className="bg-gradient-to-r from-yellow-300 to-amber-500 px-4 py-3 text-blue-950">
-                      <Download className="mr-2 h-4 w-4" /> Download
+                    <Button onClick={() => openLeadForm(doc)} className="bg-gradient-to-r from-yellow-300 to-amber-500 px-4 py-3 text-blue-950">
+                      <Download className="mr-2 h-4 w-4" /> Get Access
                     </Button>
                   </div>
                 </Card>
@@ -300,6 +321,64 @@ export default function App() {
           </div>
         </div>
       </section>
+      {selectedDoc && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm">
+          <div className="w-full max-w-xl rounded-[2rem] border border-yellow-300/30 bg-blue-950 p-6 shadow-2xl">
+            <div className="mb-5">
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-yellow-300">Before You Download</p>
+              <h3 className="mt-2 text-2xl font-black text-white">Get access to {selectedDoc.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-blue-100">
+                Fill this in so Ruches can send the right guidance for your IB, Fund Manager, or trading journey.
+              </p>
+            </div>
+
+            <form onSubmit={handleLeadSubmit} className="space-y-4">
+              <input
+                required
+                value={lead.name}
+                onChange={(e) => setLead({ ...lead, name: e.target.value })}
+                placeholder="Full name"
+                className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-blue-200 focus:ring-4 focus:ring-yellow-300/30"
+              />
+              <input
+                required
+                type="email"
+                value={lead.email}
+                onChange={(e) => setLead({ ...lead, email: e.target.value })}
+                placeholder="Email address"
+                className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-blue-200 focus:ring-4 focus:ring-yellow-300/30"
+              />
+              <input
+                required
+                value={lead.whatsapp}
+                onChange={(e) => setLead({ ...lead, whatsapp: e.target.value })}
+                placeholder="WhatsApp number"
+                className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-blue-200 focus:ring-4 focus:ring-yellow-300/30"
+              />
+              <select
+                value={lead.interest}
+                onChange={(e) => setLead({ ...lead, interest: e.target.value })}
+                className="w-full rounded-2xl border border-white/10 bg-blue-900 px-4 py-3 text-white outline-none focus:ring-4 focus:ring-yellow-300/30"
+              >
+                <option>Introducing Broker</option>
+                <option>Fund Manager</option>
+                <option>Copy Trading</option>
+                <option>Trader Account</option>
+              </select>
+
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+                <Button type="submit" className="flex-1 bg-gradient-to-r from-yellow-300 to-amber-500 text-blue-950">
+                  Download + WhatsApp Ruches
+                </Button>
+                <Button onClick={() => setSelectedDoc(null)} className="border border-white/20 bg-white/10 text-white hover:bg-white/20">
+                  Cancel
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
+
