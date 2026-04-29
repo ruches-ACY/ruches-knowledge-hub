@@ -3,16 +3,32 @@ import React, { useState } from "react";
 export default function App() {
   const [showForm, setShowForm] = useState(false);
   const [selectedDoc, setSelectedDoc] = useState("");
+  const [activeTab, setActiveTab] = useState("Introducing Broker");
 
-  const whatsappNumber = "639000000000"; // CHANGE THIS
+  const whatsappNumber = "639000000000"; // CHANGE THIS to your real WhatsApp number
 
-  const documents = [
-    "IB Partner Starter Guide",
-    "Fund Manager Roadmap",
-    "Risk Management Framework",
-    "Copy Trading Explained",
-    "Account Opening Guide"
-  ];
+  const documents = {
+    "Introducing Broker": [
+      "IB Partner Starter Guide",
+      "IB Client Onboarding Checklist",
+      "IB Marketing Scripts"
+    ],
+    "Fund Manager": [
+      "Fund Manager Roadmap",
+      "Risk Management Framework",
+      "Investor Communication Guide"
+    ],
+    "Copy Trading": [
+      "Copy Trading Explained",
+      "Signal Provider Starter Guide",
+      "Follower Education Guide"
+    ],
+    "Trader Resources": [
+      "Account Opening Guide",
+      "Funding Guide",
+      "Platform Setup Guide"
+    ]
+  };
 
   function openForm(doc) {
     setSelectedDoc(doc);
@@ -27,37 +43,78 @@ export default function App() {
     const phone = e.target.phone.value;
     const interest = e.target.interest.value;
 
-    const message = `Hi Ruches, I accessed your Knowledge Hub.%0A%0AName: ${name}%0AEmail: ${email}%0AWhatsApp: ${phone}%0AInterest: ${interest}%0ARequested Document: ${selectedDoc}`;
+    const message = `Hi Ruches, I accessed your ACY Partner Knowledge Hub.%0A%0AName: ${name}%0AEmail: ${email}%0AWhatsApp: ${phone}%0AInterest: ${interest}%0ARequested Document: ${selectedDoc}%0A%0AI would like to learn more.`;
 
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
     setShowForm(false);
   }
 
   return (
-    <div style={styles.page}>
-      <section style={styles.hero}>
-        <h1 style={styles.title}>ACY Partner Knowledge Hub</h1>
-        <p style={styles.subtitle}>
-          A premium resource center for Introducing Brokers, Fund Managers, and serious traders looking to scale their trading business.
+    <div className="page">
+      <style>{css}</style>
+
+      <nav className="nav">
+        <div>
+          <div className="brand">ACY Partner Knowledge Hub</div>
+          <div className="subbrand">by Ruches Lingad</div>
+        </div>
+        <button onClick={() => openForm("Full Partner System Access")} className="navBtn">
+          Get Access
+        </button>
+      </nav>
+
+      <section className="hero">
+        <div className="badge">Premium Resource Center for Growth-Focused Traders</div>
+        <h1>
+          Turn serious traders into <span>IBs, Fund Managers,</span> and long-term partners.
+        </h1>
+        <p>
+          A premium blue-and-gold knowledge hub designed to educate, qualify, and convert traders into higher-value opportunities within the trading ecosystem.
         </p>
 
-        <button style={styles.goldButton} onClick={() => openForm("Full Access")}>
-          Get Access to Partner System
-        </button>
+        <div className="heroBtns">
+          <button onClick={() => openForm("Full Partner System Access")} className="goldBtn">
+            Access Partner System
+          </button>
+          <button onClick={() => document.getElementById("library").scrollIntoView({ behavior: "smooth" })} className="ghostBtn">
+            View Resources
+          </button>
+        </div>
       </section>
 
-      <section style={styles.section}>
-        <h2 style={styles.sectionTitle}>Choose Your Resource</h2>
+      <section className="stats">
+        <div><strong>IB</strong><span>Partner Growth</span></div>
+        <div><strong>FM</strong><span>Capital Pathway</span></div>
+        <div><strong>Copy</strong><span>Retention Engine</span></div>
+      </section>
 
-        <div style={styles.grid}>
-          {documents.map((doc) => (
-            <div style={styles.card} key={doc}>
-              <h3 style={{ marginBottom: 10 }}>{doc}</h3>
-              <p style={{ opacity: 0.8 }}>
-                Access this guide and receive direct guidance tailored to your next step.
+      <section id="library" className="section">
+        <h2>Choose Your Resource Pathway</h2>
+        <p className="sectionText">
+          Select the client category below. Each pathway opens a curated set of documents and prompts the visitor to connect with you directly.
+        </p>
+
+        <div className="tabs">
+          {Object.keys(documents).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={activeTab === tab ? "tab active" : "tab"}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid">
+          {documents[activeTab].map((doc) => (
+            <div className="card" key={doc}>
+              <div className="cardGlow"></div>
+              <h3>{doc}</h3>
+              <p>
+                Unlock this resource and receive the next-step guidance based on your selected pathway.
               </p>
-
-              <button style={styles.goldButtonSmall} onClick={() => openForm(doc)}>
+              <button onClick={() => openForm(doc)} className="goldBtn small">
                 Get Access
               </button>
             </div>
@@ -65,32 +122,41 @@ export default function App() {
         </div>
       </section>
 
+      <section className="journey">
+        <h2>The Partner Growth Journey</h2>
+        <div className="steps">
+          {["Learn", "Qualify", "Connect", "Convert"].map((step, i) => (
+            <div className="step" key={step}>
+              <div className="circle">{i + 1}</div>
+              <h3>{step}</h3>
+              <p>{["Access the right materials", "Identify the client pathway", "Move to WhatsApp conversation", "Guide them to the next action"][i]}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {showForm && (
-        <div style={styles.overlay}>
-          <form style={styles.form} onSubmit={submitLead}>
+        <div className="overlay">
+          <form className="form" onSubmit={submitLead}>
             <h2>Secure Your Access</h2>
             <p>You selected: <b>{selectedDoc}</b></p>
 
-            <input name="name" required placeholder="Full Name" style={styles.input} />
-            <input name="email" required placeholder="Email" style={styles.input} />
-            <input name="phone" required placeholder="WhatsApp Number" style={styles.input} />
+            <input name="name" required placeholder="Full Name" />
+            <input name="email" type="email" required placeholder="Email Address" />
+            <input name="phone" required placeholder="WhatsApp Number" />
 
-            <select name="interest" style={styles.input}>
+            <select name="interest">
               <option>Introducing Broker</option>
               <option>Fund Manager</option>
               <option>Copy Trading</option>
               <option>Trader Account</option>
             </select>
 
-            <button type="submit" style={styles.goldButton}>
+            <button type="submit" className="goldBtn full">
               Continue to WhatsApp
             </button>
 
-            <button
-              type="button"
-              onClick={() => setShowForm(false)}
-              style={styles.cancel}
-            >
+            <button type="button" onClick={() => setShowForm(false)} className="cancel">
               Cancel
             </button>
           </form>
@@ -100,110 +166,328 @@ export default function App() {
   );
 }
 
-const styles = {
-  page: {
-    minHeight: "100vh",
-    background: "#071a3a", // deep navy
-    color: "white",
-    fontFamily: "Arial"
-  },
+const css = `
+* { box-sizing: border-box; }
 
-  hero: {
-    padding: "80px 30px",
-    background: "linear-gradient(135deg, #071a3a, #0d2c73, #cfa73c)", // ACY feel
-  },
+body {
+  margin: 0;
+}
 
-  title: {
-    fontSize: "50px",
-    marginBottom: 20,
-    fontWeight: "bold"
-  },
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(0, 102, 255, 0.35), transparent 35%),
+    radial-gradient(circle at top right, rgba(245, 208, 111, 0.25), transparent 30%),
+    #061a3d;
+  color: white;
+  font-family: Georgia, 'Times New Roman', serif;
+}
 
-  subtitle: {
-    fontSize: "20px",
-    maxWidth: "750px",
-    lineHeight: 1.6,
-    opacity: 0.9
-  },
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 7%;
+  border-bottom: 1px solid rgba(245, 208, 111, 0.25);
+  backdrop-filter: blur(10px);
+}
 
-  section: {
-    padding: "60px 30px"
-  },
+.brand {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
 
-  sectionTitle: {
-    fontSize: "32px",
-    marginBottom: 20
-  },
+.subbrand {
+  color: #f5d06f;
+  font-size: 14px;
+  margin-top: 4px;
+}
 
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-    gap: 20
-  },
+.navBtn, .goldBtn {
+  background: linear-gradient(135deg, #cfa73c, #f5d06f, #b88a20);
+  color: #061a3d;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 12px 30px rgba(245, 208, 111, 0.25);
+}
 
-  card: {
-    background: "rgba(255,255,255,0.05)",
-    padding: 25,
-    borderRadius: 18,
-    border: "1px solid rgba(207,167,60,0.4)"
-  },
+.navBtn:hover, .goldBtn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(245, 208, 111, 0.35);
+}
 
-  goldButton: {
-    background: "linear-gradient(90deg, #cfa73c, #f5d06f)", // vibrant gold
-    color: "#071a3a",
-    padding: "15px 25px",
-    border: "none",
-    borderRadius: 12,
-    fontWeight: "bold",
-    cursor: "pointer",
-    marginTop: 20
-  },
+.hero {
+  padding: 90px 7% 70px;
+  max-width: 1100px;
+}
 
-  goldButtonSmall: {
-    background: "linear-gradient(90deg, #cfa73c, #f5d06f)",
-    color: "#071a3a",
-    padding: "10px 16px",
-    border: "none",
-    borderRadius: 10,
-    fontWeight: "bold",
-    cursor: "pointer",
-    marginTop: 15
-  },
+.badge {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid rgba(245, 208, 111, 0.45);
+  border-radius: 999px;
+  color: #f5d06f;
+  background: rgba(255,255,255,0.06);
+  margin-bottom: 24px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
 
-  overlay: {
-    position: "fixed",
-    inset: 0,
-    background: "rgba(0,0,0,0.75)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
+.hero h1 {
+  font-size: clamp(42px, 7vw, 78px);
+  line-height: 0.95;
+  margin: 0 0 24px;
+  letter-spacing: -2px;
+}
 
-  form: {
-    background: "#071a3a",
-    padding: 30,
-    borderRadius: 20,
-    width: "100%",
-    maxWidth: 450,
-    border: "1px solid #cfa73c"
-  },
+.hero h1 span {
+  color: #f5d06f;
+}
 
-  input: {
-    width: "100%",
-    padding: 14,
-    marginTop: 12,
-    borderRadius: 10,
-    border: "1px solid #cfa73c"
-  },
+.hero p {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.7;
+  max-width: 760px;
+  color: #dbeafe;
+}
 
-  cancel: {
-    marginTop: 12,
-    width: "100%",
-    padding: 12,
-    borderRadius: 10,
-    border: "1px solid white",
-    background: "transparent",
-    color: "white",
-    cursor: "pointer"
+.heroBtns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.ghostBtn {
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.ghostBtn:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-3px);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  padding: 0 7% 60px;
+}
+
+.stats div {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(245, 208, 111, 0.25);
+  border-radius: 22px;
+  padding: 24px;
+}
+
+.stats strong {
+  display: block;
+  color: #f5d06f;
+  font-size: 34px;
+}
+
+.stats span {
+  font-family: Arial, sans-serif;
+  color: #dbeafe;
+}
+
+.section, .journey {
+  padding: 70px 7%;
+}
+
+.section h2, .journey h2 {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.sectionText {
+  font-family: Arial, sans-serif;
+  color: #dbeafe;
+  max-width: 760px;
+  line-height: 1.6;
+}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+.tab {
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 208, 111, 0.25);
+  background: rgba(255,255,255,0.06);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #cfa73c, #f5d06f);
+  color: #061a3d;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(245, 208, 111, 0.28);
+  border-radius: 28px;
+  padding: 28px;
+  min-height: 240px;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: #f5d06f;
+}
+
+.cardGlow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: rgba(245, 208, 111, 0.18);
+  border-radius: 50%;
+  top: -50px;
+  right: -50px;
+}
+
+.card h3 {
+  position: relative;
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.card p {
+  position: relative;
+  font-family: Arial, sans-serif;
+  color: #dbeafe;
+  line-height: 1.6;
+}
+
+.small {
+  padding: 12px 18px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.step {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(245, 208, 111, 0.25);
+  border-radius: 24px;
+  padding: 26px;
+}
+
+.circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #cfa73c, #f5d06f);
+  color: #061a3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.step p {
+  font-family: Arial, sans-serif;
+  color: #dbeafe;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 99;
+}
+
+.form {
+  width: 100%;
+  max-width: 500px;
+  background: #071a3a;
+  border: 1px solid #f5d06f;
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.45);
+}
+
+.form h2 {
+  margin-top: 0;
+  font-size: 32px;
+}
+
+.form p {
+  color: #dbeafe;
+  font-family: Arial, sans-serif;
+}
+
+.form input, .form select {
+  width: 100%;
+  padding: 15px;
+  margin-top: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(245, 208, 111, 0.55);
+  outline: none;
+  font-size: 15px;
+}
+
+.full {
+  width: 100%;
+}
+
+.cancel {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
-};
+
+  .hero {
+    padding-top: 60px;
+  }
+}
+`;
