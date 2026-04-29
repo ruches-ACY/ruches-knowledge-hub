@@ -121,7 +121,42 @@ export default function App() {
           ))}
         </div>
       </section>
+<section className="ibConversion">
+  <div className="ibBox">
+    <div>
+      <div className="badge">Introducing Broker Growth Path</div>
+      <h2>Build a trader network that can grow beyond one-time referrals.</h2>
+      <p>
+        This hub helps potential IBs understand the partner journey, client onboarding process,
+        trading ecosystem, and next steps to start building a long-term trading business.
+      </p>
 
+      <div className="ibPoints">
+        <div>✓ Learn how IB partnerships work</div>
+        <div>✓ Access onboarding and marketing resources</div>
+        <div>✓ Connect directly for next-step guidance</div>
+      </div>
+
+      <button onClick={() => openForm("Introducing Broker Growth System")} className="goldBtn">
+        Start IB Pathway
+      </button>
+    </div>
+
+    <div className="ibCard">
+      <h3>IB Partner System</h3>
+      <p>Educate → Qualify → Connect → Convert</p>
+      <div className="miniMetric">
+        <strong>01</strong><span>Attract traders</span>
+      </div>
+      <div className="miniMetric">
+        <strong>02</strong><span>Guide onboarding</span>
+      </div>
+      <div className="miniMetric">
+        <strong>03</strong><span>Build partner activity</span>
+      </div>
+    </div>
+  </div>
+</section>
       <section className="journey">
         <h2>The Partner Growth Journey</h2>
         <div className="steps">
@@ -213,8 +248,7 @@ body {
 }
 
 .hero {
-  padding: 90px 7% 70px;
-  max-width: 1100px;
+  padding: 90px clamp(20px, 6vw, 100px) 70px;
 }
 
 .badge {
@@ -278,7 +312,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 18px;
-  padding: 0 7% 60px;
+  padding: 0 clamp(20px, 6vw, 100px) 60px;
 }
 
 .stats div {
@@ -300,7 +334,7 @@ body {
 }
 
 .section, .journey {
-  padding: 70px 7%;
+  padding: 70px clamp(20px, 6vw, 100px);
 }
 
 .section h2, .journey h2 {
@@ -514,5 +548,135 @@ p {
 
 button {
   transition: all 0.25s ease;
+}
+/* === PREMIUM ANIMATIONS + IB CONVERSION SECTION === */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes goldPulse {
+  0% {
+    box-shadow: 0 0 0 rgba(245, 208, 111, 0);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(245, 208, 111, 0.28);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(245, 208, 111, 0);
+  }
+}
+
+.hero,
+.stats,
+.section,
+.journey,
+.ibConversion {
+  animation: fadeUp 0.8s ease both;
+}
+
+.card,
+.step,
+.stats div,
+.ibCard {
+  transition: all 0.3s ease;
+}
+
+.card:hover,
+.step:hover,
+.stats div:hover,
+.ibCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.28);
+}
+
+.goldBtn:hover,
+.navBtn:hover {
+  animation: goldPulse 1.4s ease infinite;
+}
+
+.ibConversion {
+  padding: 70px clamp(20px, 6vw, 100px);
+}
+
+.ibBox {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: center;
+  padding: 38px;
+  border: 1px solid rgba(245, 208, 111, 0.35);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at top right, rgba(245, 208, 111, 0.18), transparent 35%),
+    rgba(255, 255, 255, 0.07);
+}
+
+.ibBox h2 {
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.05;
+  margin: 18px 0;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.ibBox p {
+  max-width: 720px;
+  color: #dbeafe;
+}
+
+.ibPoints {
+  display: grid;
+  gap: 12px;
+  margin: 26px 0;
+  color: #f5d06f;
+  font-weight: 700;
+}
+
+.ibCard {
+  border-radius: 28px;
+  padding: 28px;
+  border: 1px solid rgba(245, 208, 111, 0.35);
+  background: rgba(6, 26, 61, 0.76);
+}
+
+.ibCard h3 {
+  font-size: 28px;
+  margin-top: 0;
+  color: #f5d06f;
+}
+
+.miniMetric {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.miniMetric strong {
+  color: #f5d06f;
+  font-size: 24px;
+}
+
+.miniMetric span {
+  color: #dbeafe;
+  font-weight: 600;
+}
+
+@media (max-width: 800px) {
+  .ibBox {
+    grid-template-columns: 1fr;
+    padding: 26px;
+  }
 }
 `;
