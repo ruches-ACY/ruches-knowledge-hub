@@ -180,7 +180,7 @@ body {
     radial-gradient(circle at top right, rgba(245, 208, 111, 0.25), transparent 30%),
     #061a3d;
   color: white;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 .nav {
@@ -234,7 +234,7 @@ body {
   color: #f5d06f;
   background: rgba(255,255,255,0.06);
   margin-bottom: 24px;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
   font-size: 14px;
 }
 
@@ -250,7 +250,7 @@ body {
 }
 
 .hero p {
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
   font-size: 20px;
   line-height: 1.7;
   max-width: 760px;
@@ -301,7 +301,7 @@ body {
 }
 
 .stats span {
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
   color: #dbeafe;
 }
 
@@ -315,7 +315,7 @@ body {
 }
 
 .sectionText {
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
   color: #dbeafe;
   max-width: 760px;
   line-height: 1.6;
@@ -383,7 +383,7 @@ body {
 
 .card p {
   position: relative;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
   color: #dbeafe;
   line-height: 1.6;
 }
@@ -419,7 +419,7 @@ body {
 }
 
 .step p {
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
   color: #dbeafe;
 }
 
@@ -451,7 +451,7 @@ body {
 
 .form p {
   color: #dbeafe;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 .form input, .form select {
