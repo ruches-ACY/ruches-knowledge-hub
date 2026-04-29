@@ -45,7 +45,7 @@ export default function App() {
 
     const message = `Hi Ruches, I accessed your ACY Partner Knowledge Hub.%0A%0AName: ${name}%0AEmail: ${email}%0AWhatsApp: ${phone}%0AInterest: ${interest}%0ARequested Document: ${selectedDoc}%0A%0AI would like to learn more.`;
 
-    window.open(`https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`, "_blank");
+    window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`, "_blank");
     setShowForm(false);
   }
 
@@ -157,6 +157,83 @@ export default function App() {
     </div>
   </div>
 </section>
+      <section className="authority">
+  <div className="authorityBox">
+
+    <div className="authorityLeft">
+      <div className="badge">Trusted Partner Positioning</div>
+
+      <h2>
+        Built for traders who want to operate at a <span>professional level</span>.
+      </h2>
+
+      <p>
+        This platform is designed to guide serious traders into structured growth pathways —
+        from individual trading to Introducing Broker networks, Fund Management, and Copy Trading ecosystems.
+      </p>
+
+      <div className="authorityPoints">
+        <div>✓ Structured partner pathways (IB / Fund Manager / Copy Trading)</div>
+        <div>✓ Direct access to guidance and onboarding support</div>
+        <div>✓ Built around long-term growth, not short-term trades</div>
+      </div>
+    </div>
+
+    <div className="authorityRight">
+      <div className="authorityCard">
+        <h3>What This Hub Represents</h3>
+
+        <div className="miniMetric">
+          <strong>01</strong>
+          <span>Professional trading ecosystem</span>
+        </div>
+
+        <div className="miniMetric">
+          <strong>02</strong>
+          <span>Scalable income pathways</span>
+        </div>
+
+        <div className="miniMetric">
+          <strong>03</strong>
+          <span>Partner-level opportunity</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+      <section className="finalCTA">
+  <div className="ctaBox">
+    <div className="badge">Limited Access • Partner-Level Resources</div>
+
+    <h2>
+      Turn your trading into <span>consistent income streams</span> — not just trades.
+    </h2>
+
+    <p>
+      This private system is designed for traders who want to move beyond execution
+      and step into real growth — as an Introducing Broker, Fund Manager, or Copy Trading leader.
+      <br /><br />
+      If you're serious about scaling, this is your next step.
+    </p>
+
+    <div className="ctaPoints">
+      <div>✓ Access structured IB & Fund Manager pathways</div>
+      <div>✓ Learn how to build long-term trading income streams</div>
+      <div>✓ Get direct guidance on your next move</div>
+    </div>
+
+    <div className="ctaButtons">
+      <button onClick={() => openForm("Start Partner Journey")} className="goldBtn">
+        Get Full Access Now
+      </button>
+
+      <button onClick={() => openForm("Direct Consultation")} className="ghostBtn">
+        Speak with Ruches
+      </button>
+    </div>
+  </div>
+</section>
       <section className="journey">
         <h2>The Partner Growth Journey</h2>
         <div className="steps">
@@ -200,7 +277,6 @@ export default function App() {
     </div>
   );
 }
-
 const css = `
 * { box-sizing: border-box; }
 
@@ -678,5 +754,206 @@ button {
     grid-template-columns: 1fr;
     padding: 26px;
   }
+}
+/* === FINAL CTA SECTION === */
+.finalCTA {
+  padding: 80px clamp(20px, 6vw, 100px);
+}
+
+.ctaBox {
+  text-align: center;
+  padding: 60px 30px;
+  border-radius: 30px;
+  border: 1px solid rgba(245, 208, 111, 0.4);
+  background:
+    radial-gradient(circle at top, rgba(245, 208, 111, 0.15), transparent 40%),
+    rgba(255,255,255,0.06);
+}
+
+.ctaBox h2 {
+  font-size: clamp(32px, 5vw, 56px);
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.ctaBox p {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #dbeafe;
+}
+
+.ctaButtons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+      .ctaBox span {
+  color: #f5d06f;
+}
+
+.ctaPoints {
+  margin-top: 24px;
+  display: grid;
+  gap: 10px;
+  color: #f5d06f;
+  font-weight: 700;
+}
+
+/* === TRUST + AUTHORITY SECTION === */
+
+.authority {
+  padding: 80px clamp(20px, 6vw, 100px);
+}
+
+.authorityBox {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.authorityLeft h2 {
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.05;
+  margin: 18px 0;
+  font-weight: 800;
+}
+
+.authorityLeft span {
+  color: #f5d06f;
+}
+
+.authorityLeft p {
+  max-width: 720px;
+  color: #dbeafe;
+}
+
+.authorityPoints {
+  margin-top: 24px;
+  display: grid;
+  gap: 10px;
+  color: #f5d06f;
+  font-weight: 700;
+}
+
+.authorityRight {
+  display: flex;
+  justify-content: center;
+}
+
+.authorityCard {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 28px;
+  padding: 28px;
+  border: 1px solid rgba(245, 208, 111, 0.35);
+  background: rgba(6, 26, 61, 0.76);
+}
+
+.authorityCard h3 {
+  font-size: 26px;
+  margin-top: 0;
+  color: #f5d06f;
+}
+
+@media (max-width: 800px) {
+  .authorityBox {
+    grid-template-columns: 1fr;
+  }
+}
+/* === $10K FINTECH POLISH === */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(6, 26, 61, 0.72);
+  backdrop-filter: blur(18px);
+}
+
+.page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(245, 208, 111, 0.10), transparent 25%),
+    radial-gradient(circle at 80% 30%, rgba(0, 102, 255, 0.16), transparent 28%);
+  z-index: 0;
+}
+
+.page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero {
+  min-height: 72vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card,
+.step,
+.ibBox,
+.authorityBox,
+.ctaBox,
+.stats div {
+  box-shadow:
+    0 20px 70px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.card::after,
+.ibBox::after,
+.authorityCard::after,
+.ctaBox::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 35%);
+}
+
+.card,
+.ibBox,
+.authorityCard,
+.ctaBox {
+  position: relative;
+  overflow: hidden;
+}
+
+.goldBtn {
+  background-size: 200% 200%;
+  animation: goldShimmer 5s ease infinite;
+}
+
+@keyframes goldShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.badge {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.form {
+  backdrop-filter: blur(20px);
+}
+
+input,
+select {
+  font-family: 'Montserrat', sans-serif;
+}
+
+input:focus,
+select:focus {
+  border-color: #f5d06f;
+  box-shadow: 0 0 0 4px rgba(245, 208, 111, 0.16);
 }
 `;
