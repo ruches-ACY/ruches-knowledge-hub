@@ -293,7 +293,7 @@ export default function App() {
               </div>
               <h3 className="text-2xl font-black">Contact Ruches</h3>
               <p className="mt-3 text-sm leading-6 text-blue-100">Replace this with your real WhatsApp, Calendly, or account-opening link.</p>
-              <Button href="https://wa.me/639000000000" className="mt-6 w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-blue-950">
+              <Button href="https://wa.me/639627969908" className="mt-6 w-full bg-gradient-to-r from-yellow-300 to-amber-500 text-blue-950">
                 <MessageCircle className="mr-2 h-5 w-5" /> Start on WhatsApp
               </Button>
             </Card>
